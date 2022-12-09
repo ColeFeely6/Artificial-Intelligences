@@ -49,3 +49,16 @@ def solve_sudoku(grid):
     return grid
   else:
     return None
+  
+  
+  
+  
+  
+  # Define a Sudoku puzzle
+puzzle = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0
