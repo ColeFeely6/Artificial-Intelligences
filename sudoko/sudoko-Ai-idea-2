@@ -1,0 +1,59 @@
+# Define a function to print the current state of the Sudoku board
+def print_board(board):
+  for i in range(9):
+    for j in range(9):
+      print(board[i][j], end=' ')
+    print()
+  print()
+
+# Define a function to check if a given number can be placed at a given position on the board
+def is_safe(board, row, col, num):
+  # Check if the given number is already present in the given row
+  for i in range(9):
+    if board[row][i] == num:
+      return False
+
+  # Check if the given number is already present in the given column
+  for i in range(9):
+    if board[i][col] == num:
+      return False
+
+  # Check if the given number is already present in the 3x3 sub-grid
+  start_row = row - row % 3
+  start_col = col - col % 3
+  for i in range(3):
+    for j in range(3):
+      if board[i + start_row][j + start_col] == num:
+        return False
+
+  # If the given number is not present in the row, column, or sub-grid, it can be placed at the given position
+  return True
+
+# Define the main Sudoku solving function using the backtracking algorithm
+def solve_sudoku(board):
+  # Iterate over the cells on the board to find an empty cell
+  for row in range(9):
+    for col in range(9):
+      if board[row][col] == 0:
+        # Try placing all numbers from 1 to 9 in the empty cell
+        for num in range(1, 10):
+          if is_safe(board, row, col, num):
+            # If the number can be placed safely, place it and recursively solve the rest of the board
+            board[row][col] = num
+            if solve_sudoku(board):
+              return True
+
+            # If the board cannot be solved with the current number, backtrack and try a different number
+            board[row][col] = 0
+
+        # If no number can be placed in the empty cell, the board cannot be solved
+        return False
+
+  # If there are no empty cells, the board has been solved
+  return True
+
+# Define the initial Sudoku board
+board = [
+  [5, 3, 0, 0, 7, 0, 0, 0, 0],
+  [6, 0, 0, 1, 9, 5, 0, 0, 0],
+  [0, 0 
